@@ -24,6 +24,8 @@ class Entity {
     public var bdy = 0.;
 	public var dxTotal(get,never) : Float; inline function get_dxTotal() return dx+bdx;
 	public var dyTotal(get,never) : Float; inline function get_dyTotal() return dy+bdy;
+	public var xx(get, never) : Float; inline function get_xx() return cx+xr;
+	public var yy(get, never) : Float; inline function get_yy() return cy+yr;
 	public var frict = 0.82;
 	public var bumpFrict = 0.93;
 	public var hei : Float = Const.GRID;
@@ -120,7 +122,15 @@ class Entity {
             destroyed = true;
             GC.push(this);
         }
-    }
+	}
+	
+	public inline function overlaps(e:Entity) {
+		var maxDist = radius + e.radius;
+		// classic distance formula
+		var distSqr = 16*16*(e.xx-xx)*(e.xx-xx) + 16*16*(e.yy-yy)*(e.yy-yy);
+		return distSqr<=maxDist*maxDist;
+		// note: square root is not required this comparison.
+	  }
 
     public function dispose() {
         ALL.remove(this);
@@ -234,7 +244,15 @@ class Entity {
 		while( steps>0 ) {
 			xr+=step;
 
-			// [ add X collisions checks here ]
+			if( level.hasCollision(cx-1,cy) && xr<=0.3 ) {
+				xr = 0.3;
+				dx *= Math.pow(0.5,tmod);
+			  }
+			
+			  if( level.hasCollision(cx+1,cy) && xr>=0.7 ) {
+				xr = 0.7;
+				dx *= Math.pow(0.5,tmod);
+			  }
 
 			while( xr>1 ) { xr--; cx++; }
 			while( xr<0 ) { xr++; cx--; }
@@ -251,7 +269,14 @@ class Entity {
 		while( steps>0 ) {
 			yr+=step;
 
-			// [ add Y collisions checks here ]
+			if( level.hasCollision(cx,cy-1) && yr<=0.3 ) {
+				dy = 0;
+				yr = 0.3;
+			  }
+			  if( level.hasCollision(cx,cy+1) && yr>=0.7 ) {
+				dy = 0;
+				yr = 0.7;
+			  }
 
 			while( yr>1 ) { yr--; cy++; }
 			while( yr<0 ) { yr++; cy--; }
