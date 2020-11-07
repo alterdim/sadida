@@ -10,6 +10,7 @@ class Game extends Process {
 	public var scroller : h2d.Layers;
 	public var level : Level;
 	public var hud : ui.Hud;
+	public var world : World;
 
 	public function new() {
 		super(Main.ME);
@@ -18,15 +19,18 @@ class Game extends Process {
 		ca.setLeftDeadZone(0.2);
 		ca.setRightDeadZone(0.2);
 		createRootInLayers(Main.ME.root, Const.DP_BG);
+		world = new World( hxd.Res.world.world.entry.getText() );
 
 		scroller = new h2d.Layers();
 		root.add(scroller, Const.DP_BG);
 		scroller.filter = new h2d.filter.ColorMatrix(); // force rendering for pixel perfect
 
 		camera = new Camera();
-		level = new Level();
+		level = new Level(world.levels[0]);
 		fx = new Fx();
 		hud = new ui.Hud();
+
+		new en.Hero(5, 5);
 
 		Process.resizeAll();
 		trace(Lang.t._("Game is ready."));
