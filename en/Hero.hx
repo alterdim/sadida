@@ -24,19 +24,19 @@ class Hero extends Entity {
 		super.update();
 
         if( ca.leftDown() || ca.isKeyboardDown(hxd.Key.LEFT) ) {
-            dx -= 0.1*tmod;
+            dx -= 0.07*tmod;
         }
 
 		if( ca.rightDown() || ca.isKeyboardDown(hxd.Key.RIGHT) ) {
-            dx += 0.1*tmod;
+            dx += 0.07*tmod;
         }
 
         if( ca.downDown() || ca.isKeyboardDown(hxd.Key.DOWN) ) {
-            dy += 0.1*tmod;
+            dy += 0.07*tmod;
         }
 
         if( ca.upDown() || ca.isKeyboardDown(hxd.Key.UP) ) {
-            dy -= 0.1*tmod;
+            dy -= 0.07*tmod;
         }
 
         if (ca.aDown() || ca.isKeyboardDown(hxd.Key.SPACE)) {
