@@ -32,7 +32,8 @@ class Game extends Process {
 		fx = new Fx();
 		hud = new ui.Hud();
 
-		new en.Hero(5, 5);
+		hero = new en.Hero(5, 5);
+		camera.trackTarget(hero, true);
 
 		Process.resizeAll();
 		trace(Lang.t._("Game is ready."));
