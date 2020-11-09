@@ -23,14 +23,8 @@ class Hero extends Entity {
 	override function update() { // the Entity main loop
 		super.update();
 
-		
-
-        
-
-          if( ca.leftDown() || ca.isKeyboardDown(hxd.Key.LEFT) ) {
+        if( ca.leftDown() || ca.isKeyboardDown(hxd.Key.LEFT) ) {
             dx -= 0.1*tmod;
-        
-         
         }
 
 		if( ca.rightDown() || ca.isKeyboardDown(hxd.Key.RIGHT) ) {
@@ -43,6 +37,16 @@ class Hero extends Entity {
 
         if( ca.upDown() || ca.isKeyboardDown(hxd.Key.UP) ) {
             dy -= 0.1*tmod;
+        }
+
+        if (ca.aDown() || ca.isKeyboardDown(hxd.Key.SPACE)) {
+            for (np in NPC.ALL ) 
+                {
+                    if (this.overlaps(np)) {
+                        np.textBox.reveal();
+                        trace("hey");
+                    }
+                }
         }
 	}
 }

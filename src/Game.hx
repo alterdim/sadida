@@ -1,3 +1,4 @@
+import en.Hero;
 import dn.Process;
 import hxd.Key;
 
@@ -11,6 +12,7 @@ class Game extends Process {
 	public var level : Level;
 	public var hud : ui.Hud;
 	public var world : World;
+	public var hero : Hero;
 
 	public function new() {
 		super(Main.ME);
@@ -37,6 +39,11 @@ class Game extends Process {
 	}
 
 	public function onCdbReload() {
+	}
+
+	public function setHero(h:Hero) 
+	{	
+		this.hero = h;
 	}
 
 	override function onResize() {
