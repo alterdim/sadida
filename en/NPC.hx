@@ -14,23 +14,26 @@ class NPC extends Entity {
     var ca : dn.heaps.Controller.ControllerAccess;
     public var textBox : TextBox;
     public var textVisible = true;
+    public var g : h2d.Graphics;
     
     public function new(e:World.Entity_NPC) {
         super(e.cx,e.cy);
         ca = Main.ME.controller.createAccess("npcs");
         ALL.push(this);
         data = e;
-        this.attachText(data.f_Text);
+        
     
         // Some default rendering for our character
-        var g = new h2d.Graphics(spr);
+        g = new h2d.Graphics(spr);
         g.beginFill(0xff0000);
         g.drawRect(-8,-8,16,16);
+
+        this.attachText(data.f_Text);
     }
 
     public function attachText(s:String)
         {
-            this.textBox = new TextBox(s);
+            this.textBox = new TextBox(s, this);
         }
 
     override function update() { // the Entity main loop
