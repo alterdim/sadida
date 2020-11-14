@@ -11,7 +11,7 @@
 	"defaultPivotY": 0,
 	"defaultGridSize": 32,
 	"bgColor": "#7F8093",
-	"nextUid": 10,
+	"nextUid": 11,
 	"minifyJson": false,
 	"exportTiled": false,
 	"defs": {
@@ -106,11 +106,11 @@
 				"pivotY": 0,
 				"fieldDefs": [
 					{
-						"identifier": "Text",
-						"__type": "String",
-						"uid": 6,
+						"identifier": "TextArray",
+						"__type": "Array<String>",
+						"uid": 10,
 						"type": "F_String",
-						"isArray": false,
+						"isArray": true,
 						"canBeNull": true,
 						"arrayMinLength": null,
 						"arrayMaxLength": null,
@@ -119,10 +119,7 @@
 						"editorAlwaysShow": false,
 						"min": null,
 						"max": null,
-						"defaultOverride": {
-							"id": "V_String",
-							"params": ["Hello"]
-						}
+						"defaultOverride": null
 					}
 				]
 			},
@@ -206,7 +203,19 @@
 				"gridTiles": [],
 				"entityInstances": [
 					{ "__identifier": "Hero", "__grid": [18,14], "__tile": null, "defUid": 3, "px": [576,448], "fieldInstances": [{ "__identifier": "Text", "__value": [], "__type": "Array<String>", "defUid": 4, "realEditorValues": [] }] },
-					{ "__identifier": "NPC", "__grid": [31,12], "__tile": null, "defUid": 5, "px": [992,384], "fieldInstances": [{ "__identifier": "Text", "__value": "Hello", "__type": "String", "defUid": 6, "realEditorValues": [] }] }
+					{ "__identifier": "NPC", "__grid": [31,12], "__tile": null, "defUid": 5, "px": [992,384], "fieldInstances": [{
+						"__identifier": "TextArray",
+						"__value": [ "Hello", "Bitch" ],
+						"__type": "Array<String>",
+						"defUid": 10,
+						"realEditorValues": [ {
+							"id": "V_String",
+							"params": ["Hello"]
+						}, {
+							"id": "V_String",
+							"params": ["Bitch"]
+						} ]
+					}] }
 				]
 			},
 			{

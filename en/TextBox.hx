@@ -1,39 +1,49 @@
 package en;
 
+import h2d.Object;
 import dn.Color;
 import h2d.Text;
 
 class TextBox extends Entity {
     var visible : Bool;
-    var text : String;
+    var text : Array<String>;
     var wrapper : h2d.Object;
     var bg : h2d.Graphics;
     var tf : h2d.Text;
-    var parent : Entity;
-    public function new(str:String, parent:NPC)
+    var parent : h2d.Object;
+    var textIndex = 0;
+    public function new(str:Array<String>, cx:Int, cy:Int)
     {
-        super(parent.cx, parent.cy);
+        super(cx,cy);
         this.visible = true;
         this.text = str;
-        this.parent = parent;
-        tf = new h2d.Text(Assets.fontPixel, new h2d.Graphics(parent.g));
+        this.parent = new h2d.Graphics(spr);
+        
+        tf = new h2d.Text(Assets.fontPixel, parent);
+        tf.text = text[textIndex];
         tf.alpha = 0;
-        tf.text = str;
         tf.textAlign = Center;
+        
         
 
     }
-
-    public function reveal()
+    
+    public function next()
         {
-            level.game.camera.trackTarget(parent, false);
             tf.alpha = 1;
-
-        }
-
-    override function update()
-        {
-            
+            if (textIndex + 1 <= text.length) 
+            {
+                
+                tf.text = text[textIndex];
+                textIndex++;
+                return false;
+            }
+            else 
+            {
+                textIndex = 0;
+                tf.alpha = 0;
+                return true;
+            }
         }
 
 }

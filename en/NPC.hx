@@ -1,5 +1,7 @@
 package en;
 
+import h2d.Flow;
+import ui.Window;
 import h2d.Text;
 import dn.Color;
 import h3d.mat.Data.MipMap;
@@ -28,12 +30,12 @@ class NPC extends Entity {
         g.beginFill(0xff0000);
         g.drawRect(-8,-8,16,16);
 
-        this.attachText(data.f_Text);
+        this.attachText(data.f_TextArray);
     }
 
-    public function attachText(s:String)
+    public function attachText(s:Array<String>)
         {
-            this.textBox = new TextBox(s, this);
+            this.textBox = new TextBox(s, cx, cy);
         }
 
     override function update() { // the Entity main loop

@@ -5,6 +5,7 @@ class Hero extends Entity {
     var ca : dn.heaps.Controller.ControllerAccess;
     public var g : h2d.Graphics;
     public var blocked = false;
+    public var inText : TextBox;
 
 	public function new(x,y) {
 		super(x,y);
@@ -41,17 +42,31 @@ class Hero extends Entity {
             if( ca.upDown() || ca.isKeyboardDown(hxd.Key.UP) ) {
                 dy -= 0.07*tmod;
             }
+        }
     
-            if (ca.aDown() || ca.isKeyboardDown(hxd.Key.SPACE)) {
-                for (np in NPC.ALL ) 
+            if (ca.isKeyboardPressed(hxd.Key.SPACE)) {
+                if (!blocked)
                     {
-                        if (this.overlaps(np)) {
-                            np.textBox.reveal();
-                            blocked = true;
-                        }
+                        for (np in NPC.ALL) 
+                            {
+                                if (this.overlaps(np)) {
+                                    np.textBox.next();
+                                    inText = np.textBox;
+                                    blocked = true;
+                                    level.game.camera.trackTarget(np, false);
+                                }
+                            }
                     }
+                else {
+                    if (inText.next()) 
+                    {
+                        blocked = false;
+                        level.game.camera.trackTarget(this, false);
+                    }
+                }   
+                
             }
+
         }
         
 	}
-}
