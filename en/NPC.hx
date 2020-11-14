@@ -18,6 +18,7 @@ class NPC extends Entity {
     public var textVisible = true;
     public var g : h2d.Graphics;
     
+    
     public function new(e:World.Entity_NPC) {
         super(e.cx,e.cy);
         ca = Main.ME.controller.createAccess("npcs");
@@ -35,7 +36,9 @@ class NPC extends Entity {
 
     public function attachText(s:Array<String>)
         {
+            
             this.textBox = new TextBox(s, cx, cy);
+            
         }
 
     override function update() { // the Entity main loop
